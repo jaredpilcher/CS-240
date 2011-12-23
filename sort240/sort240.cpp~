@@ -1,12 +1,13 @@
 #include <iostream>
 #include <string.h>
+#include <strings.h>
 #include <cstdlib>
 #include <fstream>
 #include <cassert>
 using namespace std;
 
 int reverse=0, case_sense=1, numeric=0, field=1;
-const int MAX=2048;
+const int MAX=2048, MEMSETOFFSET=8;
 
 void resolveArguments(int & reverse, int & case_sense, int & numeric, int & field, char input_file[], const int argc, char * argv[]);
 
@@ -18,11 +19,16 @@ private:
 	char line[MAX];
 	char field[MAX];
 public:
+	
 	String(char line_arg[], char field_arg[]){
 		strncpy(line, line_arg, strlen(line_arg)+1);
 		strncpy(field, field_arg, strlen(field_arg)+1);
 	}
+	
+	char * getField(){return field;}
+	char * getLine() {return line;}
 	friend ostream& operator << (ostream& s, String& string_object);
+	friend int compareStrings(const void * pstring1, const void * pstring2);
 	
 };
 
@@ -31,6 +37,49 @@ ostream& operator << (ostream& s, String& string_object){
 		return s;
 }
 
+int compareStrings(const void * pstring1, const void * pstring2){
+	String ** string1 = (String**) pstring1;
+	String ** string2 = (String**) pstring2;
+	
+	//comparison based on arguments
+	if(numeric){
+	    int int1 = atoi((*string1)->getField());
+	    int int2 = atoi((*string2)->getField());
+	    int return_value=0;
+	    if(int1>int2){return_value = -1;}
+	    if(int1==int2){return_value = 0;}
+	    return_value = 1;
+	    if(reverse){
+	        return return_value;
+	    }
+	    else{
+	        return (-1)*return_value;
+	    }
+	    
+	}
+	else if(reverse){
+	      if(case_sense){
+		return (-1)*strncmp((*string1)->getField(), (*string2)->getField(), MAX);
+	      }
+	      else{
+		char tempstr1 [MAX];
+		char tempstr2 [MAX];
+		strcpy(tempstr1, (*string1)->getField());
+		strcpy(tempstr2, (*string2)->getField());
+		return (-1)*strncasecmp((*string1)->getField(), (*string2)->getField(), MAX);
+	      }
+	}
+	else if(!case_sense){
+	      char tempstr1 [MAX];
+	      char tempstr2 [MAX];
+	      strcpy(tempstr1, (*string1)->getField());
+	      strcpy(tempstr2, (*string2)->getField());
+	      return strncasecmp((*string1)->getField(), (*string2)->getField(), MAX);
+	}
+	else{
+	      return strncmp((*string1)->getField(), (*string2)->getField(), MAX);
+	}
+}
 
 
 int main(int argc, char * argv[]){
@@ -49,8 +98,8 @@ int main(int argc, char * argv[]){
 	char field_buffer[MAX];
 	int i=0;
 	while(1){
-		memset(line_buffer, 0, MAX);
-		memset(field_buffer, 0, MAX);
+		memset(line_buffer, 0, MAX-MEMSETOFFSET);
+		memset(field_buffer, 0, MAX-MEMSETOFFSET);
 		infile.getline(line_buffer, MAX);
 		if(!infile){break;}
 		getField(field_buffer, line_buffer, field);
@@ -58,14 +107,14 @@ int main(int argc, char * argv[]){
 			line_list[i] = new String(line_buffer, field_buffer);
 			i++;
 		}
-		cout << "here" << endl;
 	}
 	
+	
 	//sort line_list using qsort. Comparison function described above.
-	//qsort(line_list, i+1, sizeof(line_buffer[0]), compareStrings);
+	qsort(line_list, i, sizeof(line_list[0]), compareStrings);
 	
 	//print line_list
-	for(int j = 0; j<=i; j++){
+	for(int j = 0; j<i; j++){
 		cout << (*line_list[j]) << endl;
 	}
 
@@ -80,7 +129,7 @@ void getField(char field_buffer[], char line_buffer[], int field){
 		if(isspace(line_buffer[i]) && !isspace(line_buffer[i+1])){
 			field--;
 		}
-		if(!field){
+		if(field==1){
 			break;
 		}
 	}
@@ -97,7 +146,7 @@ void getField(char field_buffer[], char line_buffer[], int field){
 	else{
 		strncpy(field_buffer, &line_buffer[i+1], j-i);
 	}
-	
+	cout << field_buffer << endl;
 	return;
 
 	
