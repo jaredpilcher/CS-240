@@ -31,7 +31,13 @@ char * joinURL(char * base, char * url){
 		strncat(base,url,strlen(url));
 		return base;
 	}
-	strncat(base,url+1,strlen(url));
+	if(url[0]=='/'){
+		strncat(base,url+1,strlen(url));
+	}
+	else{
+			strcat(base, "/");
+			strncat(base,url,strlen(url));
+	}
 	return base;
 }
 
@@ -100,7 +106,7 @@ char * cleanRelative(char * url){
 //Go through the base and remove the number of parents specified by relative_count
 //Return the base c-string
 char * removeParents(char * base, int relative_count){
-	for(int i = strlen(base) - 1; i >= 0; i--){
+	for(int i = strlen(base) - 2; i >= 0; i--){
 		if(relative_count == 0) break;
 		if(base[i] == '/'){
 			base[i + 1] = 0;
@@ -115,8 +121,13 @@ int countParents(char * base){
 	int parent_count = 0;
 	for(int i = strlen(base) - 3; i> 0; i--){
 		if(base[i] == '/'){
-			if(base[i-1] == '/' || base[i+1] == '/') break;
+			if(base[0]=='h'){
+				if(base[i-1] == '/' || base[i+1] == '/') break;
+			}
 			parent_count++;
+			if(base[0]=='f'){
+				if(base[i-1] == '/' || base[i+1] == '/') break;
+			}
 			
 		}
 	}	
@@ -174,9 +185,11 @@ int main(int argc, char * argv[]){
             break;
         default:
 			if(countParents(base_url)==0 && base_url[0]=='f'){
-				char base_url [] = "file:///";
+				url = resolveRelative(base_url_file, url);
 			}
-            url = resolveRelative(base_url, url);
+			else{
+				url = resolveRelative(base_url, url);
+			}
             break;
     }
     
