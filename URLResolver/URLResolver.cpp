@@ -2,7 +2,7 @@
 #include <string.h>
 using namespace std;
 
-const int FILESLASHES = 1;
+const int FILESLASHES = 2;
 const int WEBSLASHES = 2;
 
 //Removes the file name from the base string that is passed in through the shell.
@@ -14,7 +14,8 @@ char * getBaseString(char * base_url){
         }
     }
 	//Start here. Need to not allow file second '/' in file:// to be deleted but have basename in file://query?name to be deleted
-	if(base_url[slash_location - 1] != '/'){
+	int base_length = strlen(base_url);
+	if(base_url[base_length-4] != '.'){
 	    base_url[slash_location + 1] = 0; 
 	}
     return base_url;
@@ -76,6 +77,7 @@ char * resolveRoot(char * base, char * url){
     }
     else{
         base = getWebFileBase(base, FILESLASHES);
+		cout << "base: " << base << endl;
         strncat(base, url, strlen(url));
         url = base;
     }
@@ -149,12 +151,17 @@ char * resolveRelative(char * base, char * url){
 	if(parent_count == 0 && base[0] == 'f'){
 		int base_length = strlen(base);
 		base[base_length] = '/';
-		if(url[0] == '.' || url[0] == '/'){
+		if((url==&base[base_length+1]) && (url[0] == '.' || url[0] == '/')){
+			cout << "url: " << url << endl;
 			url = url +1;
 			base[base_length + 1] = 0;
+			cout << "here" << endl;
+		}
+		else if (url==&base[base_length+1]){
+			return base;
 		}
 		else{
-			return base;
+			base[base_length+1]=0;
 		}
 	}
 	if(relative_count > parent_count){
