@@ -114,6 +114,7 @@ char * removeParents(char * base, int relative_count){
 	return base;
 }
 
+//Count the number of parents that the base url contains. Return result
 int countParents(char * base){
 	int parent_count = 0;
 	for(int i = strlen(base) - 1; i> 0; i--){
