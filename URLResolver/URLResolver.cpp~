@@ -2,7 +2,7 @@
 #include <string.h>
 using namespace std;
 
-const int FILESLASHES = 1;
+const int FILESLASHES = 2;
 const int WEBSLASHES = 2;
 
 //Removes the file name from the base string that is passed in through the shell.

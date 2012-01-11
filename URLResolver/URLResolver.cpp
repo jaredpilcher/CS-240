@@ -13,7 +13,6 @@ char * getBaseString(char * base_url){
             slash_location = i;
         }
     }
-	//Start here. Need to not allow file second '/' in file:// to be deleted but have basename in file://query?name to be deleted
 	int base_length = strlen(base_url);
 	if(base_url[base_length-4] != '.'){
 	    base_url[slash_location + 1] = 0; 
