@@ -2,9 +2,6 @@
 #include <string.h>
 using namespace std;
 
-const int FILESLASHES = 2;
-const int WEBSLASHES = 2;
-
 //Removes the file name from the base string that is passed in through the shell.
 char * getBaseString(char * base_url){
     int slash_location = 0;
@@ -25,41 +22,29 @@ char * getBaseString(char * base_url){
 //If the url starts with a slash, it is removed
 //Both the base and url pointers and values are changed
 char * joinURL(char * base, char * url){
-	int	base_length = strlen(base);
-    if(base[base_length - 1]!='/'){
+	int base_length = strlen(base);
+	if(base[base_length-1]!='/' && url[0]!='/' && &base[base_length+1] == url){
 		base[base_length] = '/';
-		if(&base[base_length + 1] == url && (url[0] == '.' || url[0] == '/')){
-			url = url + 1;
-			base[base_length+1] = 0;
-		}
-		else if(&base[base_length + 1] == url){
-			return base;			
-		}
-		else{
-			base[base_length+1] = 0;
-		}
-        
-    }
-    
-    if(url[0]=='/'){
-        strncat(base, url+1, strlen(url));
-    }
-    else{
-        strncat(base, url, strlen(url));
-    }
-    return base;
+		return base;
+	} 
+	if((base[base_length-1]!='/' && url[0]=='/') || (base[base_length-1]=='/' && url[0]!='/')){
+		strncat(base,url,strlen(url));
+		return base;
+	}
+	strncat(base,url+1,strlen(url));
+	return base;
 }
 
 //Collects only the top portion of the URL for resolveRoot function
 //Changes the base pointer and value
-char * getWebFileBase(char * base, int slashes){
+char * getWebBase(char * base){
     int slash_count = 0;
     int i = 0;
     for(; base[i]!=0; i++){
         if(base[i] == '/'){
             slash_count++;
         }
-        if(slash_count>slashes){
+        if(slash_count>2){
             break;
         }
     }
@@ -71,14 +56,11 @@ char * getWebFileBase(char * base, int slashes){
 //Both the base and url pointers and values are changed
 char * resolveRoot(char * base, char * url){
     if(base[0] == 'h'){
-        base = getWebFileBase(base, WEBSLASHES);
+        base = getWebBase(base);
         url = joinURL(base, url);
     }
     else{
-        base = getWebFileBase(base, FILESLASHES);
-		cout << "base: " << base << endl;
-        strncat(base, url, strlen(url));
-        url = base;
+		url = joinURL(base,url);
     }
 	
     return url;
@@ -106,7 +88,7 @@ int countRelative(char * url){
 //Remove all of the './' and '../' items in the relative URL
 //Return the url pointer
 char * cleanRelative(char * url){
-	for(int i = 0; url[i] != 0 && url[i+1] != 0; i++){
+	for(int i = 0; url[i+1] != 0; i++){
 		if(url[i] >= 'A'){
 			url = &url[i];
 			break;
@@ -131,7 +113,7 @@ char * removeParents(char * base, int relative_count){
 //Count the number of parents that the base url contains. Return result
 int countParents(char * base){
 	int parent_count = 0;
-	for(int i = strlen(base) - 2; i> 0; i--){
+	for(int i = strlen(base) - 3; i> 0; i--){
 		if(base[i] == '/'){
 			if(base[i-1] == '/' || base[i+1] == '/') break;
 			parent_count++;
@@ -141,29 +123,17 @@ int countParents(char * base){
 	return parent_count;
 }
 
+char * resolveFileBase(char * base){
+	
+}
+
 //Resolve URL that include relative file symbols.
 //These are symbols that include './' and '../'
 //Both the base and url pointers and values are changed
 char * resolveRelative(char * base, char * url){
 	int relative_count = countRelative(url);
 	int parent_count = countParents(base);
-	if(parent_count == 0 && base[0] == 'f'){
-		int base_length = strlen(base);
-		base[base_length] = '/';
-		if((url==&base[base_length+1]) && (url[0] == '.' || url[0] == '/')){
-			cout << "url: " << url << endl;
-			url = url +1;
-			base[base_length + 1] = 0;
-			cout << "here" << endl;
-		}
-		else if (url==&base[base_length+1]){
-			return base;
-		}
-		else{
-			base[base_length+1]=0;
-		}
-	}
-	if(relative_count > parent_count){
+	if(parent_count < relative_count){
 		relative_count = parent_count;
 	}
 	url = cleanRelative(url);
@@ -175,13 +145,13 @@ char * resolveRelative(char * base, char * url){
 //Resolve URL concatenation
 int main(int argc, char * argv[]){
     if(argc != 3){
-        cout << "Improper use. This program is used to resolve url strings. " << endl;
         cout << "USAGE: ./URLResolver <base-url> <relative-url>" << endl;
         return 0;
     }
     
     //Set up original url variables
 	char * base_url = 0;
+	char base_url_file[9] = "file:///";
 	char * url = argv[2];
 	if(url[0] != '#'){
 		base_url = getBaseString(argv[1]);
@@ -189,16 +159,23 @@ int main(int argc, char * argv[]){
 	else{
 		base_url = argv[1];
 	}
-	cout << "base_url: " << base_url << endl;
     //Perform actions on url variables
     switch(url[0]){
         case '/':
-            url = resolveRoot(base_url, url);
+			if(base_url[0]=='f'){
+				url = resolveRoot(base_url_file, url);
+			}
+			else{
+	            url = resolveRoot(base_url, url);
+			}
             break;
         case '#':
             url = resolveInternal(base_url, url);
             break;
         default:
+			if(countParents(base_url)==0 && base_url[0]=='f'){
+				char base_url [] = "file:///";
+			}
             url = resolveRelative(base_url, url);
             break;
     }
