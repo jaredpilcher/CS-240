@@ -13,7 +13,10 @@ char * getBaseString(char * base_url){
             slash_location = i;
         }
     }
-    base_url[slash_location] = 0; 
+	//Start here. Need to not allow file second '/' in file:// to be deleted but have basename in file://query?name to be deleted
+	if(base_url[slash_location - 1] != '/'){
+	    base_url[slash_location + 1] = 0; 
+	}
     return base_url;
 }
 
@@ -22,11 +25,20 @@ char * getBaseString(char * base_url){
 //If the url starts with a slash, it is removed
 //Both the base and url pointers and values are changed
 char * joinURL(char * base, char * url){
-    int i =0;
-    for(;base[i]!=0; i++){
-    }
-    if(base[i-1]!='/'){
-        strcat(base, "/");
+	int	base_length = strlen(base);
+    if(base[base_length - 1]!='/'){
+		base[base_length] = '/';
+		if(&base[base_length + 1] == url && (url[0] == '.' || url[0] == '/')){
+			url = url + 1;
+			base[base_length+1] = 0;
+		}
+		else if(&base[base_length + 1] == url){
+			return base;			
+		}
+		else{
+			base[base_length+1] = 0;
+		}
+        
     }
     
     if(url[0]=='/'){
@@ -51,7 +63,7 @@ char * getWebFileBase(char * base, int slashes){
             break;
         }
     }
-    base[i+1] = 0;
+    base[i] = 0;
     return base;
 }
 
@@ -67,6 +79,7 @@ char * resolveRoot(char * base, char * url){
         strncat(base, url, strlen(url));
         url = base;
     }
+	
     return url;
 }
 
@@ -105,11 +118,11 @@ char * cleanRelative(char * url){
 //Return the base c-string
 char * removeParents(char * base, int relative_count){
 	for(int i = strlen(base) - 1; i >= 0; i--){
+		if(relative_count == 0) break;
 		if(base[i] == '/'){
 			base[i + 1] = 0;
 			relative_count--;
 		}
-		if(relative_count == 0) break;
 	}
 	return base;
 }
@@ -117,10 +130,11 @@ char * removeParents(char * base, int relative_count){
 //Count the number of parents that the base url contains. Return result
 int countParents(char * base){
 	int parent_count = 0;
-	for(int i = strlen(base) - 1; i> 0; i--){
+	for(int i = strlen(base) - 2; i> 0; i--){
 		if(base[i] == '/'){
+			if(base[i-1] == '/' || base[i+1] == '/') break;
 			parent_count++;
-			if(base[i-1] == '/') break;
+			
 		}
 	}	
 	return parent_count;
@@ -132,6 +146,17 @@ int countParents(char * base){
 char * resolveRelative(char * base, char * url){
 	int relative_count = countRelative(url);
 	int parent_count = countParents(base);
+	if(parent_count == 0 && base[0] == 'f'){
+		int base_length = strlen(base);
+		base[base_length] = '/';
+		if(url[0] == '.' || url[0] == '/'){
+			url = url +1;
+			base[base_length + 1] = 0;
+		}
+		else{
+			return base;
+		}
+	}
 	if(relative_count > parent_count){
 		relative_count = parent_count;
 	}
@@ -145,7 +170,7 @@ char * resolveRelative(char * base, char * url){
 int main(int argc, char * argv[]){
     if(argc != 3){
         cout << "Improper use. This program is used to resolve url strings. " << endl;
-        cout << "Please follow this convention: ./URLResolver <base-url> <relative-url>" << endl;
+        cout << "USAGE: ./URLResolver <base-url> <relative-url>" << endl;
         return 0;
     }
     
@@ -158,12 +183,9 @@ int main(int argc, char * argv[]){
 	else{
 		base_url = argv[1];
 	}
-    
-    
-    
+	cout << "base_url: " << base_url << endl;
     //Perform actions on url variables
     switch(url[0]){
-        cout << "here" << endl;
         case '/':
             url = resolveRoot(base_url, url);
             break;
@@ -176,8 +198,7 @@ int main(int argc, char * argv[]){
     }
     
     //Print out result
-    cout << "New URL is: " << url << endl;
-
+	cout << url << endl;
     return 0;
 
 }
