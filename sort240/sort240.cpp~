@@ -58,6 +58,7 @@ int main(int argc, char * argv[]){
 			line_list[i] = new String(line_buffer, field_buffer);
 			i++;
 		}
+		cout << "here" << endl;
 	}
 	
 	//sort line_list using qsort. Comparison function described above.
