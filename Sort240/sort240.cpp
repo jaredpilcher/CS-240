@@ -30,11 +30,14 @@ int main(int argc, char * argv[]){
 	char input_file[MAX];
 	resolveArguments(reverse, case_sense, numeric, field, input_file, argc, argv);
 	
-	String * line_list[MAX];
-	char line_buffer[MAX], field_buffer[MAX];
 	ifstream infile(input_file);
 	int i=0;
+	String * line_list[MAX];
+	char line_buffer[MAX];
+	char field_buffer[MAX];
+	
 	while(1){
+		memset(field_buffer, 0, 10);
 		infile.getline(line_buffer, MAX);
 		if(!infile){break;}
 		getField(field_buffer, line_buffer, field);

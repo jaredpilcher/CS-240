@@ -30,12 +30,17 @@ int main(int argc, char * argv[]){
 	char input_file[MAX];
 	resolveArguments(reverse, case_sense, numeric, field, input_file, argc, argv);
 	
-	String * line_list[MAX];
-	char line_buffer[MAX], field_buffer[MAX];
 	ifstream infile(input_file);
 	int i=0;
+	String * line_list[MAX];
+	char line_buffer[MAX];
+	char field_buffer[MAX];
+	
 	while(1){
+		memset(field_buffer, 0, 10);
+		cout << "here" << endl;
 		infile.getline(line_buffer, MAX);
+		cout << "here2" << endl;
 		if(!infile){break;}
 		getField(field_buffer, line_buffer, field);
 		line_list[i] = new String(line_buffer, field_buffer);
@@ -47,6 +52,7 @@ int main(int argc, char * argv[]){
 
 }
 
+//Friday: Finish debugging this function
 char * getField(char field_buffer[], char line_buffer[], int field){
 	int i;
 	for(i=0; line_buffer[i+1]; i++){

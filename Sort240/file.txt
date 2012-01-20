@@ -1,6 +1,6 @@
 this is a line
 this is a line
-this was 
-is is
-a was
-line is
+this was a line 
+is is the line
+a was happy line
+line is sad line
