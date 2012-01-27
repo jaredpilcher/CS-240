@@ -57,7 +57,7 @@ bool LinkedList::IsEmpty() const{
 	if(top==NULL){
 		return true;
 	}
-	else return false;
+	return false;
 }
 
 

@@ -1,3 +1,5 @@
+#ifndef LLNODE_HEADER_GUARD
+#define LLNODE_HEADER_GUARD
 #include <string>
 #include <iostream>
 
@@ -30,3 +32,4 @@ class LLNode
 		LLNode * prev;            //!< pointer to previous node in the list
 		LLNode * next;            //!< pointer to next node in the list
 };
+#endif
