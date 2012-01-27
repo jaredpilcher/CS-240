@@ -21,6 +21,8 @@ class LLNode
 		
 		//! Assignment operator 
 		LLNode & operator=(const LLNode & other);
+		
+		static void print(LLNode * Node);
 	
 	private:
 		std::string value;        //!< value stored in the node

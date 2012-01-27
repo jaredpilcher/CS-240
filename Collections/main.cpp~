@@ -4,28 +4,22 @@ using namespace std;
 
 int main(){
 	LinkedList List;
-	string test_string("This is a test");
-	string test_string2("This is a second test");
+	string test_string="This is a test";
+	string test_string2="This is a second test";
+	string test_string3="This is a third test";
 
-	LLNode * newNode = List.Insert(test_string, NULL);
-	LLNode * secondNode = List.Insert(test_string2, newNode);
-	LLNode * Node;
-//	Node = List.GetFirst();
-	Node = List.Find(test_string2, newNode);
-	if(Node!=NULL){
-		cout << Node->GetValue() << endl;
-		cout << Node->GetPrevious() << endl;
-		cout << Node->GetNext() << endl;
-	}
-	List.Remove(secondNode);
-	Node = List.Find(test_string2, newNode);
-	if(Node!=NULL){
-		cout << Node->GetValue() << endl;
-		cout << Node->GetPrevious() << endl;
-		cout << Node->GetNext() << endl;
-	}
-	else{
-		cout << "cannot find that string" << endl;
-		cout << List.GetSize() << endl;
-	}
+	LLNode * Node1, *Node2, *Node3;
+	Node1 = List.Insert(test_string, NULL);
+	
+	Node2 = List.Insert(test_string2, Node1);
+
+	Node3 = List.Insert(test_string3, Node2);
+	cout << "/////////printing list1////////////////" << endl;
+	LinkedList::printList(List);
+	LinkedList List2=List;
+	cout << "/////////printing list1////////////////" << endl;
+	LinkedList::printList(List);
+	cout << "/////////printing list2////////////////" << endl;
+	LinkedList::printList(List2);
+	
 }

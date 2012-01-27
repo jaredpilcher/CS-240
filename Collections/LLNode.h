@@ -1,4 +1,5 @@
 #include <string>
+#include <iostream>
 
 //! LLNode implements a doubly-linked list node
 class LLNode 
@@ -21,6 +22,8 @@ class LLNode
 		
 		//! Assignment operator 
 		LLNode & operator=(const LLNode & other);
+		
+		static void print(LLNode * Node);
 	
 	private:
 		std::string value;        //!< value stored in the node

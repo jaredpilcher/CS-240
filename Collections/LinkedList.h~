@@ -2,6 +2,7 @@
 #define CS240_LINKED_LIST_H
 
 #include <string>
+#include <iostream>
 #include "LLNode.h"
 
 //! LinkedList implements a doubly-linked list
@@ -40,9 +41,7 @@ class LinkedList
 	
 	
 		//!  @return a pointer to the first node in the list, or NULL if the list is empty
-		LLNode * GetFirst()const{
-			return top;
-		}
+		LLNode * GetFirst()const;
 	
 	
 	
@@ -76,11 +75,15 @@ class LinkedList
 		//!  
 		//!  @param n The node being removed from the list
 		void Remove(LLNode * n);
+		void printList(const LinkedList & List);
 	
 	private:
 	LLNode * top;
 	LLNode * bottom;
 	int size;
+	void removeNodes(LLNode * Node);
+	void copyList(const LinkedList & other);
+	
 };
 
 

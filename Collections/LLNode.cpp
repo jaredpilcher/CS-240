@@ -29,6 +29,19 @@ LLNode * LLNode::GetNext() const
   return next;
 }
 
+void LLNode::print(LLNode * Node){
+	if(Node!=NULL){
+		cout << "Node has: " << endl;
+		cout << ">>>>value: " << Node->value << endl;
+		cout << ">>>>next: " << Node->next << endl;
+		cout << ">>>>prev: " << Node->prev << endl;
+		cout << ">>>>addr: " << Node << endl;
+	}
+	else{
+		cout << "Node is Null" << endl;
+	}
+}
+
 //! Assignment operator 
 LLNode & LLNode::operator=(const LLNode & other)
 {
