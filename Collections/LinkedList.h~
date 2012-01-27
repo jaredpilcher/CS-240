@@ -40,7 +40,9 @@ class LinkedList
 	
 	
 		//!  @return a pointer to the first node in the list, or NULL if the list is empty
-		LLNode * GetFirst()const;
+		LLNode * GetFirst()const{
+			return top;
+		}
 	
 	
 	

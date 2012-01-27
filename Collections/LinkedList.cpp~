@@ -120,7 +120,6 @@ LLNode * LinkedList::Find(const std::string & v, LLNode * n) const{
 void LinkedList::Remove(LLNode * n){
 	if(n->prev!=NULL) n->prev->next = n->next;
 	if(n->next!=NULL) n->next->prev = n->prev;
-	size--;
 	delete n;
 }
 
