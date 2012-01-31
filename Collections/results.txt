@@ -1,0 +1,35 @@
+Running the Collections Test Passoff
+make -f /users/ta/cs240ta/bin/collections/Makefile PASSOFF_DIR=/users/ta/cs240ta/bin/collections part1
+g++ -I./ -Wall -Winit-self -Wmissing-include-dirs -Wextra -Wfloat-equal -c -ggdb /users/ta/cs240ta/bin/collections/test_runner.cpp -o  test_runner.o
+g++ -I./ -Wall -Winit-self -Wmissing-include-dirs -Wextra -Wfloat-equal -c -ggdb /users/ta/cs240ta/bin/collections/test_ll.cpp -o  test_ll.o
+g++ -I./ -Wall -Winit-self -Wmissing-include-dirs -Wextra -Wfloat-equal -c -ggdb /users/ta/cs240ta/bin/collections/test_bst.cpp -o  test_bst.o
+g++ -I./ -Wall -Winit-self -Wmissing-include-dirs -Wextra -Wfloat-equal -c -ggdb LinkedList.cpp -o  LinkedList.o
+g++ -I./ -Wall -Winit-self -Wmissing-include-dirs -Wextra -Wfloat-equal -c -ggdb BST.cpp -o  BST.o
+g++  ./test_runner.o  ./test_ll.o  ./test_bst.o ./LinkedList.o ./BST.o -lboost_program_options -lboost_filesystem -lboost_iostreams -o  ./test_runner
+time ./test_runner
+CS 240 Collections Pass Off
+
+BST: 
+	1 Default Constructor...ok
+	2 Insert...failed
+	3 GetSize...failed
+	4 Find...failed
+	5 Copy Constructor...failed
+	6 Assignment Operator...failed
+	7 Clear...failed
+	8 IsEmpty...failed
+
+LinkedList: 
+	1 Default Constructor...ok
+	2 Basic Insert Tests...failed
+	3 Clear...failed
+	4 IsEmpty...ok
+	5 Insert...failed
+	6 Copy Constructor...failed
+	7 Assignment Operator...failed
+	8 Find...failed
+Segfaulted during the test "Remove"
+(Does not mean that function caused the segfault) 
+rm -f ./test_runner
+rm -f ./LinkedList.o ./BST.o
+rm -f  ./test_runner.o  ./test_ll.o  ./test_bst.o

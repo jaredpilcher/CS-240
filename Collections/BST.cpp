@@ -3,13 +3,14 @@
 using namespace std;
 
 //!  No-arg constructor.  Initializes an empty BST
-BST::BST(): top(NULL){
+BST::BST(): top(NULL), size(0){
 }
 
 
 //!  Copy constructor.  Makes a complete copy of its argument
 BST::BST(const BST & other){
 	top = copyTree(other.top);
+	size=other.size;
 }
 
 
@@ -25,8 +26,9 @@ BST::~BST(){
 //!  @return Reference to oneself
 BST& BST::operator =(const BST & other){
 	removeNodes(top);
-	top = copytree(other.top);
+	top = copyTree(other.top);
 	size = other.size;
+	return *this;
 }
 
 BSTNode * BST::copyTree(BSTNode* otherNode){
@@ -63,6 +65,7 @@ void BST::Clear(){
 }
 
 void BST::removeNodes(BSTNode * Node){
+	if(Node==NULL) return;
 	if(Node->left!=NULL){
 		removeNodes(Node->left);
 	}
@@ -162,3 +165,56 @@ void BST::printTree(BSTNode* Node) const{
 //!
 //!  @return true if v was removed from the tree, or false if v was not in the tree
 //bool Remove(const std::string & v);
+
+
+//!  Constructor
+BSTNode::BSTNode(const std::string & v) :
+  value(v), left(NULL), right(NULL){
+}
+
+//! Copy Constructor
+BSTNode::BSTNode(const BSTNode & other) : 
+  value(other.value),left(other.left),right(other.right){
+}
+
+
+//!  Read-only public methods for use by clients of the BST class
+const std::string & BSTNode::GetValue() const{
+  return value;
+}
+
+
+
+BSTNode * BSTNode::GetLeft()const{
+  return left;
+}
+
+
+BSTNode * BSTNode::GetRight()const{
+  return right;
+}
+
+//! Assignment operator 
+BSTNode & BSTNode::operator=(const BSTNode & other){
+	if(this!=&other){
+		value=other.value;
+		left=other.left;
+		right=other.right;
+	}
+	
+	return *this;
+}
+
+void BSTNode::print(){
+	if(this==NULL){
+		cout << "Node is empty" << endl;
+		return;
+	}
+	cout << "Node has: " << endl;
+	cout << ">>>>value: " << value << endl;
+	cout << ">>>>left: " << left << endl;
+	cout << ">>>>right: " << right << endl;
+	cout << ">>>>addr: " << this << endl;
+}
+
+
