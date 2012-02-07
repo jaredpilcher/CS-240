@@ -30,7 +30,7 @@ void LinkedList::copyList(const LinkedList & other){
 		}
 		hisCurNode = hisCurNode->next;
 	}
-	bottom = hisCurNode;
+	bottom = myCurNode;
 	size = other.size;
 }
 
@@ -45,19 +45,18 @@ LinkedList::~LinkedList(){
 //! Assignment operator.  Makes a complete copy of its argument
 //! @return A reference to oneself
 LinkedList& LinkedList::operator =(const LinkedList & other){
+	if(this==&other) return *this;
 	removeNodes(top);
 	top=NULL;
 	bottom=NULL;
 	copyList(other);
+	return *this;
 }
 
 
 //!  @return true if the list is empty, or false if the list is not empty
 bool LinkedList::IsEmpty() const{
-	if(top==NULL){
-		return true;
-	}
-	return false;
+	return top==NULL;
 }
 
 
@@ -66,7 +65,7 @@ void LinkedList::Clear(){
 	removeNodes(top);
 	top=NULL;
 	bottom=NULL;
-	return;
+	size=0;
 }
 
 //Delete all nodes, starting with Node
@@ -77,7 +76,6 @@ void LinkedList::removeNodes(LLNode * Node){
 	if(next!=NULL){
 		removeNodes(next);
 	}
-	return;
 }
 
 //!  @return the number of values in the list
@@ -113,6 +111,7 @@ LLNode * LinkedList::Insert(const std::string & v, LLNode * n){
 	LLNode * newNode;
 	if(n==NULL){
 		newNode = new LLNode(v, NULL, top);
+		if(top==NULL) bottom = newNode;
 		if(top!=NULL) top->prev = newNode;
 		top = newNode;
 	}
@@ -141,10 +140,10 @@ LLNode * LinkedList::Insert(const std::string & v, LLNode * n){
 //!
 //!  @return a pointer to the node containing v, or NULL if v is not found
 LLNode * LinkedList::Find(const std::string & v, LLNode * n) const{
-	LLNode * returnNode = n;
-	if(returnNode==NULL){
-		returnNode = top;
-	}
+	LLNode * returnNode=top;
+	if(n!=NULL){
+		returnNode = n->next;
+	}	
 	while(returnNode!=NULL){
 		if(returnNode->value == v){
 			break;
@@ -159,6 +158,7 @@ LLNode * LinkedList::Find(const std::string & v, LLNode * n) const{
 //!  
 //!  @param n The node being removed from the list
 void LinkedList::Remove(LLNode * n){
+	if(n==NULL) return;
 	if(n->prev!=NULL){
 		n->prev->next = n->next;
 	}
@@ -179,7 +179,10 @@ void LinkedList::printList(const LinkedList & List){
 	int i=0;
 	LLNode * Node;
 	Node = List.top;
-	cout << List.top << endl;
+	cout << "\t\n" << endl;
+	cout << "List top: " << List.top << endl;
+	cout << "List bottom: " << List.bottom << endl;
+	cout << "List size: " << List.size << endl;
 	while(Node!=NULL){
 		cout << "Node " << i << " has:" << endl;
 		cout << ">>>>value: " << Node->value << endl;
@@ -190,7 +193,73 @@ void LinkedList::printList(const LinkedList & List){
 		i++;
 	}
 	if(i==0) cout << "Nothing in List" << endl;
-	return;
 }
 
+LLNode * LinkedList::getTop(){
+	return top;
+}
+LLNode * LinkedList::getBottom(){
+	return bottom;
+}
+int LinkedList::getSize(){
+	return size;
+}
+
+//LLNode Member Functions
+
+// LLNode Constructor
+LLNode::LLNode(const std::string & v, LLNode * p, LLNode * n) :
+  value(v), prev(p), next(n){
+}
+
+//! Copy Constructor 
+LLNode::LLNode(const LLNode & other) : 
+   value(other.value),prev(other.prev),next(other.next){
+}
+
+//!  Read-only public methods for use by clients of the LinkedList class
+const std::string & LLNode::GetValue() const{
+  return value;
+}
+
+LLNode * LLNode::GetPrevious() const{
+  return prev;
+}
+
+LLNode * LLNode::GetNext() const{
+  return next;
+}
+
+void LLNode::print(LLNode * Node){
+	if(Node!=NULL){
+		cout << "Node has: " << endl;
+		cout << ">>>>value: " << Node->value << endl;
+		cout << ">>>>next: " << Node->next << endl;
+		cout << ">>>>prev: " << Node->prev << endl;
+		cout << ">>>>addr: " << Node << endl;
+	}
+	else{
+		cout << "Node is Null" << endl;
+	}
+}
+
+//! Assignment operator 
+LLNode & LLNode::operator=(const LLNode & other){
+	if(this!=&other){
+		value=other.value;
+		prev=other.prev;
+		next=other.next;
+	}
+	return *this;
+}
+
+LLNode * LLNode::getPrev(){
+	return prev;
+}
+LLNode * LLNode::getNext(){
+	return next;
+}
+string LLNode::getValue(){
+	return value;
+}
 

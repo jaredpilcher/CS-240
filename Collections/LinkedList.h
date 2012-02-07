@@ -3,7 +3,39 @@
 
 #include <string>
 #include <iostream>
-#include "LLNode.h"
+
+//! LLNode implements a doubly-linked list node
+class LLNode 
+{		
+		friend class LinkedList;  //!< LinkedList can access private members of LLNode
+	public:
+	
+		//!  Constructor
+		LLNode(const std::string & v, LLNode * p, LLNode * n);
+		
+		//! Copy Constructor 
+		LLNode(const LLNode & other);
+	
+		//!  Read-only public methods for use by clients of the LinkedList class
+		const std::string & GetValue() const;
+	
+		LLNode * GetPrevious() const;
+	
+		LLNode * GetNext() const;
+		
+		//! Assignment operator 
+		LLNode & operator=(const LLNode & other);
+		
+		static void print(LLNode * Node);
+		LLNode * getPrev();
+		LLNode * getNext();
+		std::string getValue();
+	
+	private:
+		std::string value;        //!< value stored in the node
+		LLNode * prev;            //!< pointer to previous node in the list
+		LLNode * next;            //!< pointer to next node in the list
+};
 
 //! LinkedList implements a doubly-linked list
 class LinkedList
@@ -76,6 +108,9 @@ class LinkedList
 		//!  @param n The node being removed from the list
 		void Remove(LLNode * n);
 		static void printList(const LinkedList & List);
+		LLNode * getTop();
+		LLNode * getBottom();
+		int getSize();
 	
 	private:
 	LLNode * top;

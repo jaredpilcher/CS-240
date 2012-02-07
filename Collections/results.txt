@@ -1,0 +1,120 @@
+Running the Collections Test Passoff
+make -f /users/ta/cs240ta/bin/collections/Makefile PASSOFF_DIR=/users/ta/cs240ta/bin/collections part1
+g++ -I./ -Wall -Winit-self -Wmissing-include-dirs -Wextra -Wfloat-equal -c -ggdb /users/ta/cs240ta/bin/collections/test_runner.cpp -o  test_runner.o
+g++ -I./ -Wall -Winit-self -Wmissing-include-dirs -Wextra -Wfloat-equal -c -ggdb /users/ta/cs240ta/bin/collections/test_ll.cpp -o  test_ll.o
+g++ -I./ -Wall -Winit-self -Wmissing-include-dirs -Wextra -Wfloat-equal -c -ggdb /users/ta/cs240ta/bin/collections/test_bst.cpp -o  test_bst.o
+g++ -I./ -Wall -Winit-self -Wmissing-include-dirs -Wextra -Wfloat-equal -c -ggdb LinkedList.cpp -o  LinkedList.o
+g++ -I./ -Wall -Winit-self -Wmissing-include-dirs -Wextra -Wfloat-equal -c -ggdb BST.cpp -o  BST.o
+g++  ./test_runner.o  ./test_ll.o  ./test_bst.o ./LinkedList.o ./BST.o -lboost_program_options -lboost_filesystem -lboost_iostreams -o  ./test_runner
+time ./test_runner
+CS 240 Collections Pass Off
+
+BST: 
+	1 Default Constructor...ok
+	2 Insert...failed
+	3 GetSize...failed
+	4 Find...failed
+	5 Copy Constructor...failed
+	6 Assignment Operator...failed
+	7 Clear...failed
+	8 IsEmpty...failed
+
+LinkedList: 
+	1 Default Constructor...ok
+	2 Basic Insert Tests...failed
+	3 Clear...failed
+	4 IsEmpty...ok
+	5 Insert...failed
+	6 Copy Constructor...failed
+	7 Assignment Operator...failed
+	8 Find...failed
+Segfaulted during the test "Remove"
+(Does not mean that function caused the segfault) 
+rm -f ./test_runner
+rm -f ./LinkedList.o ./BST.o
+rm -f  ./test_runner.o  ./test_ll.o  ./test_bst.o
+Running the Collections Test Passoff
+make -f /users/ta/cs240ta/bin/collections/Makefile PASSOFF_DIR=/users/ta/cs240ta/bin/collections part1
+g++ -I./ -Wall -Winit-self -Wmissing-include-dirs -Wextra -Wfloat-equal -c -ggdb /users/ta/cs240ta/bin/collections/test_runner.cpp -o  test_runner.o
+g++ -I./ -Wall -Winit-self -Wmissing-include-dirs -Wextra -Wfloat-equal -c -ggdb /users/ta/cs240ta/bin/collections/test_ll.cpp -o  test_ll.o
+g++ -I./ -Wall -Winit-self -Wmissing-include-dirs -Wextra -Wfloat-equal -c -ggdb /users/ta/cs240ta/bin/collections/test_bst.cpp -o  test_bst.o
+g++ -I./ -Wall -Winit-self -Wmissing-include-dirs -Wextra -Wfloat-equal -c -ggdb LinkedList.cpp -o  LinkedList.o
+g++ -I./ -Wall -Winit-self -Wmissing-include-dirs -Wextra -Wfloat-equal -c -ggdb BST.cpp -o  BST.o
+g++  ./test_runner.o  ./test_ll.o  ./test_bst.o ./LinkedList.o ./BST.o -lboost_program_options -lboost_filesystem -lboost_iostreams -o  ./test_runner
+time ./test_runner
+CS 240 Collections Pass Off
+
+BST: 
+	1 Default Constructor...ok
+	2 Insert...failed
+	3 GetSize...failed
+	4 Find...failed
+	5 Copy Constructor...failed
+	6 Assignment Operator...failed
+	7 Clear...failed
+	8 IsEmpty...failed
+
+LinkedList: 
+	1 Default Constructor...ok
+	2 Basic Insert Tests...ok
+	3 Clear...failed
+	4 IsEmpty...ok
+	5 Insert...ok
+	6 Copy Constructor...failed
+	7 Assignment Operator...failed
+	8 Find...failed
+	9 Remove...ok
+
+
+---> group: BST, test: test<2> : Insert
+     problem: assertion failed
+     failed assertion: "Instert() - Did not return NULL when the value was in the tree: expected '0' actual '0x20b9330'"
+
+---> group: BST, test: test<3> : GetSize
+     problem: assertion failed
+     failed assertion: "Instert() - Did not return NULL when the value was in the tree: expected '0' actual '0x20b93d0'"
+
+---> group: BST, test: test<4> : Find
+     problem: assertion failed
+     failed assertion: "Instert() - Did not return NULL when the value was in the tree: expected '0' actual '0x20b93d0'"
+
+---> group: BST, test: test<5> : Copy Constructor
+     problem: assertion failed
+     failed assertion: "Instert() - Did not return NULL when the value was in the tree: expected '0' actual '0x20b9750'"
+
+---> group: BST, test: test<6> : Assignment Operator
+     problem: assertion failed
+     failed assertion: "Instert() - Did not return NULL when the value was in the tree: expected '0' actual '0x20b9790'"
+
+---> group: BST, test: test<7> : Clear
+     problem: assertion failed
+     failed assertion: "Instert() - Did not return NULL when the value was in the tree: expected '0' actual '0x20b9a90'"
+
+---> group: BST, test: test<8> : IsEmpty
+     problem: assertion failed
+     failed assertion: "Instert() - Did not return NULL when the value was in the tree: expected '0' actual '0x20b9b60'"
+
+---> group: LinkedList, test: test<3> : Clear
+     problem: assertion failed
+     failed assertion: "Clear() - size != 0: expected '0' actual '1'"
+
+---> group: LinkedList, test: test<6> : Copy Constructor
+     problem: assertion failed
+     failed assertion: "Reverse Compare Lists(copy/original) - The nodes point to the same adress in memeory"
+
+---> group: LinkedList, test: test<7> : Assignment Operator
+     problem: assertion failed
+     failed assertion: "Reverse Compare Lists(copy/original) - The nodes point to the same adress in memeory"
+
+---> group: LinkedList, test: test<8> : Find
+     problem: assertion failed
+     failed assertion: "Find() - Find is starting its search on the node given, not the node after the one given: expected '0' actual '0x20a5510'"
+
+tests summary:
+ failures:11
+ ok:6
+
+Finished
+rm -f ./test_runner
+rm -f ./LinkedList.o ./BST.o
+rm -f  ./test_runner.o  ./test_ll.o  ./test_bst.o

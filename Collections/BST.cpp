@@ -3,30 +3,32 @@
 using namespace std;
 
 //!  No-arg constructor.  Initializes an empty BST
-BST::BST(): top(NULL){
+BST::BST(): top(NULL), size(0){
 }
 
 
 //!  Copy constructor.  Makes a complete copy of its argument
 BST::BST(const BST & other){
 	top = copyTree(other.top);
+	size=other.size;
 }
 
 
 //!  Destructor
 BST::~BST(){
-	removeNodes(top);
-	size = 0;
-	top=NULL;
+	Clear();
 }
 
 
 //!  Assignment operator.  Makes a complete copy of its argument
 //!  @return Reference to oneself
 BST& BST::operator =(const BST & other){
-	removeNodes(top);
-	top = copytree(other.top);
-	size = other.size;
+	if(this!=&other){
+		removeNodes(top);
+		top = copyTree(other.top);
+		size = other.size;
+	}
+	return *this;
 }
 
 BSTNode * BST::copyTree(BSTNode* otherNode){
@@ -47,10 +49,7 @@ BSTNode * BST::GetRoot()const{
 
 //!  @return true if the BST is empty, or false if the BST is not empty
 bool BST::IsEmpty() const{
-	if(top==NULL){
-		return true;	
-	}
-	return false;
+	return top == NULL;
 }
 
 
@@ -59,18 +58,13 @@ void BST::Clear(){
 	removeNodes(top);
 	size = 0;
 	top=NULL;
-	return;
 }
 
 void BST::removeNodes(BSTNode * Node){
-	if(Node->left!=NULL){
-		removeNodes(Node->left);
-	}
-	if(Node->right!=NULL){
-		removeNodes(Node->right);
-	}
+	if(Node==NULL) return;
+	removeNodes(Node->left);
+	removeNodes(Node->right);
 	delete Node;
-	return;
 }
 
 //!  @return the number of values in the BST
@@ -86,6 +80,7 @@ int BST::GetSize() const{
 //!  @return a pointer to the newly inserted node, or NULL if v was already
 //!          in the tree (i.e., NULL is used to indicate a duplicate insertion)
 BSTNode * BST::Insert(const std::string & v){	
+	if(Find(v)) return NULL;
 	BSTNode * Node;
 	Node = new BSTNode(v);
 	insertNode(top,Node);
@@ -103,7 +98,6 @@ void BST::insertNode(BSTNode* &prevNode, BSTNode * inNode){
 	else{
 		insertNode(prevNode->right, inNode);
 	}
-	return;
 }
 
 
@@ -149,7 +143,6 @@ void BST::printTree(BSTNode* Node) const{
 	if(Node->right!=NULL){
 		printTree(Node->right);
 	}
-	return;
 }
 
 
@@ -162,3 +155,56 @@ void BST::printTree(BSTNode* Node) const{
 //!
 //!  @return true if v was removed from the tree, or false if v was not in the tree
 //bool Remove(const std::string & v);
+
+
+//!  Constructor
+BSTNode::BSTNode(const std::string & v) :
+  value(v), left(NULL), right(NULL){
+}
+
+//! Copy Constructor
+BSTNode::BSTNode(const BSTNode & other) : 
+  value(other.value),left(other.left),right(other.right){
+}
+
+
+//!  Read-only public methods for use by clients of the BST class
+const std::string & BSTNode::GetValue() const{
+  return value;
+}
+
+
+
+BSTNode * BSTNode::GetLeft()const{
+  return left;
+}
+
+
+BSTNode * BSTNode::GetRight()const{
+  return right;
+}
+
+//! Assignment operator 
+BSTNode & BSTNode::operator=(const BSTNode & other){
+	if(this!=&other){
+		value=other.value;
+		left=other.left;
+		right=other.right;
+	}
+	
+	return *this;
+}
+
+void BSTNode::print(){
+	if(this==NULL){
+		cout << "Node is empty" << endl;
+		return;
+	}
+	cout << "Node has: " << endl;
+	cout << ">>>>value: " << value << endl;
+	cout << ">>>>left: " << left << endl;
+	cout << ">>>>right: " << right << endl;
+	cout << ">>>>addr: " << this << endl;
+}
+
+

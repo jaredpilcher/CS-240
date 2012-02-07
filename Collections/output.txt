@@ -1,0 +1,357 @@
+CS 240 Collections Pass Off
+
+
+LinkedList:
+
+	 1 Default Constructor
+	
+
+List top: 0
+List bottom: 0
+List size: 0
+Nothing in List
+
+	 2 Basic Insert
+Before inserting: 
+	
+
+List top: 0
+List bottom: 0
+List size: 0
+Nothing in List
+Inserted "Test 1" at top of list
+	
+
+List top: 0x175b040
+List bottom: 0
+List size: 1
+Node 0 has:
+>>>>value: Test 1
+>>>>next: 0
+>>>>prev: 0
+>>>>addr: 0x175b040
+The returned node was: 
+Node has: 
+>>>>value: Test 1
+>>>>next: 0
+>>>>prev: 0
+>>>>addr: 0x175b040
+Inserted "Test 2" after first node
+	
+
+List top: 0x175b040
+List bottom: 0x175b090
+List size: 2
+Node 0 has:
+>>>>value: Test 1
+>>>>next: 0x175b090
+>>>>prev: 0
+>>>>addr: 0x175b040
+Node 1 has:
+>>>>value: Test 2
+>>>>next: 0
+>>>>prev: 0x175b040
+>>>>addr: 0x175b090
+The returned node was: 
+Node has: 
+>>>>value: Test 2
+>>>>next: 0
+>>>>prev: 0x175b040
+>>>>addr: 0x175b090
+Inserted "Test 3" after first node
+	
+
+List top: 0x175b040
+List bottom: 0x175b090
+List size: 3
+Node 0 has:
+>>>>value: Test 1
+>>>>next: 0x175b0e0
+>>>>prev: 0
+>>>>addr: 0x175b040
+Node 1 has:
+>>>>value: Test 3
+>>>>next: 0x175b090
+>>>>prev: 0x175b040
+>>>>addr: 0x175b0e0
+Node 2 has:
+>>>>value: Test 2
+>>>>next: 0
+>>>>prev: 0x175b0e0
+>>>>addr: 0x175b090
+The returned node was: 
+Node has: 
+>>>>value: Test 3
+>>>>next: 0x175b090
+>>>>prev: 0x175b040
+>>>>addr: 0x175b0e0
+Inserted "Test 4" at top of list
+	
+
+List top: 0x175b130
+List bottom: 0x175b090
+List size: 4
+Node 0 has:
+>>>>value: Test 4
+>>>>next: 0x175b040
+>>>>prev: 0
+>>>>addr: 0x175b130
+Node 1 has:
+>>>>value: Test 1
+>>>>next: 0x175b0e0
+>>>>prev: 0x175b130
+>>>>addr: 0x175b040
+Node 2 has:
+>>>>value: Test 3
+>>>>next: 0x175b090
+>>>>prev: 0x175b040
+>>>>addr: 0x175b0e0
+Node 3 has:
+>>>>value: Test 2
+>>>>next: 0
+>>>>prev: 0x175b0e0
+>>>>addr: 0x175b090
+The returned node was: 
+Node has: 
+>>>>value: Test 4
+>>>>next: 0x175b040
+>>>>prev: 0
+>>>>addr: 0x175b130
+CS 240 Collections Pass Off
+
+
+LinkedList:
+
+	 1 Default Constructor
+	
+
+List top: 0
+List bottom: 0
+List size: 0
+Nothing in List
+
+	 2 Basic Insert
+Before inserting: 
+	
+
+List top: 0
+List bottom: 0
+List size: 0
+Nothing in List
+Inserted "Test 1" at top of list
+	
+
+List top: 0x2246040
+List bottom: 0x2246040
+List size: 1
+Node 0 has:
+>>>>value: Test 1
+>>>>next: 0
+>>>>prev: 0
+>>>>addr: 0x2246040
+The returned node was: 
+Node has: 
+>>>>value: Test 1
+>>>>next: 0
+>>>>prev: 0
+>>>>addr: 0x2246040
+Inserted "Test 2" after first node
+	
+
+List top: 0x2246040
+List bottom: 0x2246090
+List size: 2
+Node 0 has:
+>>>>value: Test 1
+>>>>next: 0x2246090
+>>>>prev: 0
+>>>>addr: 0x2246040
+Node 1 has:
+>>>>value: Test 2
+>>>>next: 0
+>>>>prev: 0x2246040
+>>>>addr: 0x2246090
+The returned node was: 
+Node has: 
+>>>>value: Test 2
+>>>>next: 0
+>>>>prev: 0x2246040
+>>>>addr: 0x2246090
+Inserted "Test 3" after first node
+	
+
+List top: 0x2246040
+List bottom: 0x2246090
+List size: 3
+Node 0 has:
+>>>>value: Test 1
+>>>>next: 0x22460e0
+>>>>prev: 0
+>>>>addr: 0x2246040
+Node 1 has:
+>>>>value: Test 3
+>>>>next: 0x2246090
+>>>>prev: 0x2246040
+>>>>addr: 0x22460e0
+Node 2 has:
+>>>>value: Test 2
+>>>>next: 0
+>>>>prev: 0x22460e0
+>>>>addr: 0x2246090
+The returned node was: 
+Node has: 
+>>>>value: Test 3
+>>>>next: 0x2246090
+>>>>prev: 0x2246040
+>>>>addr: 0x22460e0
+Inserted "Test 4" at top of list
+	
+
+List top: 0x2246130
+List bottom: 0x2246090
+List size: 4
+Node 0 has:
+>>>>value: Test 4
+>>>>next: 0x2246040
+>>>>prev: 0
+>>>>addr: 0x2246130
+Node 1 has:
+>>>>value: Test 1
+>>>>next: 0x22460e0
+>>>>prev: 0x2246130
+>>>>addr: 0x2246040
+Node 2 has:
+>>>>value: Test 3
+>>>>next: 0x2246090
+>>>>prev: 0x2246040
+>>>>addr: 0x22460e0
+Node 3 has:
+>>>>value: Test 2
+>>>>next: 0
+>>>>prev: 0x22460e0
+>>>>addr: 0x2246090
+The returned node was: 
+Node has: 
+>>>>value: Test 4
+>>>>next: 0x2246040
+>>>>prev: 0
+>>>>addr: 0x2246130
+CS 240 Collections Pass Off
+
+
+LinkedList:
+
+	 1 Default Constructor
+	
+
+List top: 0
+List bottom: 0
+List size: 0
+Nothing in List
+
+	 2 Basic Insert
+Before inserting: 
+	
+
+List top: 0
+List bottom: 0
+List size: 0
+Nothing in List
+Inserted "Test 1" at top of list
+	
+
+List top: 0x2370040
+List bottom: 0x2370040
+List size: 1
+Node 0 has:
+>>>>value: Test 1
+>>>>next: 0
+>>>>prev: 0
+>>>>addr: 0x2370040
+The returned node was: 
+Node has: 
+>>>>value: Test 1
+>>>>next: 0
+>>>>prev: 0
+>>>>addr: 0x2370040
+Inserted "Test 2" after first node
+	
+
+List top: 0x2370040
+List bottom: 0x2370090
+List size: 2
+Node 0 has:
+>>>>value: Test 1
+>>>>next: 0x2370090
+>>>>prev: 0
+>>>>addr: 0x2370040
+Node 1 has:
+>>>>value: Test 2
+>>>>next: 0
+>>>>prev: 0x2370040
+>>>>addr: 0x2370090
+The returned node was: 
+Node has: 
+>>>>value: Test 2
+>>>>next: 0
+>>>>prev: 0x2370040
+>>>>addr: 0x2370090
+Inserted "Test 3" after first node
+	
+
+List top: 0x2370040
+List bottom: 0x2370090
+List size: 3
+Node 0 has:
+>>>>value: Test 1
+>>>>next: 0x23700e0
+>>>>prev: 0
+>>>>addr: 0x2370040
+Node 1 has:
+>>>>value: Test 3
+>>>>next: 0x2370090
+>>>>prev: 0x2370040
+>>>>addr: 0x23700e0
+Node 2 has:
+>>>>value: Test 2
+>>>>next: 0
+>>>>prev: 0x23700e0
+>>>>addr: 0x2370090
+The returned node was: 
+Node has: 
+>>>>value: Test 3
+>>>>next: 0x2370090
+>>>>prev: 0x2370040
+>>>>addr: 0x23700e0
+Inserted "Test 4" at top of list
+	
+
+List top: 0x2370130
+List bottom: 0x2370090
+List size: 4
+Node 0 has:
+>>>>value: Test 4
+>>>>next: 0x2370040
+>>>>prev: 0
+>>>>addr: 0x2370130
+Node 1 has:
+>>>>value: Test 1
+>>>>next: 0x23700e0
+>>>>prev: 0x2370130
+>>>>addr: 0x2370040
+Node 2 has:
+>>>>value: Test 3
+>>>>next: 0x2370090
+>>>>prev: 0x2370040
+>>>>addr: 0x23700e0
+Node 3 has:
+>>>>value: Test 2
+>>>>next: 0
+>>>>prev: 0x23700e0
+>>>>addr: 0x2370090
+The returned node was: 
+Node has: 
+>>>>value: Test 4
+>>>>next: 0x2370040
+>>>>prev: 0
+>>>>addr: 0x2370130
