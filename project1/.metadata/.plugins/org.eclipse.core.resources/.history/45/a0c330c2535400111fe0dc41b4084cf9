@@ -1,0 +1,29 @@
+/*
+ * WebCrawler.h
+ *
+ *  Created on: Feb 10, 2012
+ *      Author: jared
+ */
+#ifndef WEBCRAWLER_H_
+#define WEBCRAWLER_H_
+
+#include <string>
+
+
+class WebCrawler{
+		string start_url, output_file, stop_file;
+	public:
+		WebCrawler(string arg_url, string arg_output, string arg_stop): start_url(arg_url), output_file(arg_output), stop_file(arg_stop){
+		}
+
+		~WebCrawler(){
+		}
+
+		CrawlWeb(){
+
+		}
+
+	private:
+};
+
+#endif /* WEBCRAWLER_H_ */

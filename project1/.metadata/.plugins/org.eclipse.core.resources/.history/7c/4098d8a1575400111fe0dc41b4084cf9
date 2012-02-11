@@ -1,0 +1,42 @@
+/*
+ * WebCrawler.cpp
+ *
+ *  Created on: Feb 10, 2012
+ *      Author: jared
+ */
+using namespace std;
+
+void WebCrawler::CrawlWeb(){
+	PageDownloader downloader;
+	WordIndex index;
+	HTMLParser parser;
+	StopWords stop_words;
+	PageHistory history;
+	XMLGenerator generator;
+	PageQueue queue;
+
+	//create new page and place in queue and history
+	Page* page = new Page(start_url);
+	queue.push(page);
+	history.push(page);
+
+	stop_words.getWords(stop_file);
+
+	string page_string;
+
+	while(!queue.empty()){
+		//Download page
+		page_string = downloader.download(queue.pop());
+		//Parse string returned from downloader
+		parser.parse(page_string());
+		//Grab the description and set to page
+		page.setDescription(parser.getDescription());
+		page.
+		//Go through the html document and index words
+		while(!parser.empty()){
+			parser.getWord
+		}
+
+	}
+
+}

@@ -1,0 +1,9 @@
+!SESSION 2012-02-10 18:30:03.521 -----------------------------------------------
+eclipse.buildId=I20110613-1736
+java.version=1.6.0_23
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=linux, ARCH=x86, WS=gtk, NL=en_US
+Command-line arguments:  -os linux -ws gtk -arch x86
+
+!ENTRY org.eclipse.cdt.core 1 0 2012-02-10 18:31:09.169
+!MESSAGE Indexed 'webcrawler' (0 sources, 98 headers) in 1.55 sec: 2,297 declarations; 2,450 references; 0 unresolved inclusions; 0 syntax errors; 0 unresolved names (0.00%)
