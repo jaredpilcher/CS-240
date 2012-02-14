@@ -12,17 +12,17 @@ bin: $(BIN_FILE)
 
 #Create Project 1 test executable and run
 test: $(TEST_BIN_FILE)
-	$(BIN_FILE) &
+	$(TEST_BIN_FILE) &
 
 #Create CS240 Library
 lib: $(LIBRARY)
 
 #remove all library, object files, and executables
 clean:
-	rm -f lib/*
-	rm -f obj/*
-	rm -f bin/*
-	rm -f utils/obj/*
+	-rm -f lib/*
+	-rm -f obj/*
+	-rm -f bin/*
+	-rm -f utils/obj/*
 
 #Create test executable
 $(TEST_BIN_FILE): $(TEST_OBJ_FILES) $(LIBRARY)
