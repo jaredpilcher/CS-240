@@ -9,7 +9,9 @@ using namespace std;
 int reverse=0, case_sense=1, numeric=0, field=1;
 const int MAX=2048, MEMSETOFFSET=8;
 
-void resolveArguments(int & reverse, int & case_sense, int & numeric, int & field, char input_file[], const int argc, char * argv[]);
+void resolveArguments(int & reverse, int & case_sense, 
+					int & numeric, int & field, char input_file[], 
+					const int argc, char * argv[]);
 
 void getField(char field_buffer[], char line_buffer[], int field);
 
@@ -146,7 +148,6 @@ void getField(char field_buffer[], char line_buffer[], int field){
 	else{
 		strncpy(field_buffer, &line_buffer[i+1], j-i);
 	}
-	cout << field_buffer << endl;
 	return;
 
 	

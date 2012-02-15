@@ -8,13 +8,34 @@
 #ifndef PAGE_H_
 #define PAGE_H_
 
+//Contains the url and description of a page
 class Page{
+	//Contains the url of the webpage
+	string url;
+	//Contains the description found on the webpage
+	string description;
 public:
-	Page(){
+	//Default Constructor
+	Page():url(""), description(""){
 	}
 
+	//Default Deconstructor
 	~Page(){
 	}
+	
+	//Retrieves the url of the page
+	string getURl();
+
+	//Retrieves the description of the page
+	string getDescription();
+
+	//Sets the url of the page
+	//@par url - the url of the page
+	void setURL(string url);
+
+	//Set the description of the page
+	//@par description - the description of the page
+	void setDescription(string description);
 
 private:
 };
