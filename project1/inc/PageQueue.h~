@@ -12,10 +12,12 @@
 class PageQueue{
 public:
 	//Default Constructor
-	PageQueue();
+	PageQueue(){
+	}
 
 	//Default Deconstructor
-	~PageQueue();
+	~PageQueue(){
+	}
 
 	//Pushes a page on the the queue
 	//@par page - the page to be inserted onto the queue

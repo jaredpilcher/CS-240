@@ -36,6 +36,7 @@ public:
 	//@par description - the description of the page
 	void setDescription(string description);
 
+private:
 };
 
 #endif /* PAGE_H_ */

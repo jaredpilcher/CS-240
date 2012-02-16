@@ -131,9 +131,9 @@ class LinkedList
 		//! @returns the first node in the list, or NULL if the list is empty
 		LLNode Pop(){
 			LLNode temp;
-			temp = GetFirst();
-			Remove(temp);
-			return *temp;
+			temp = *GetFirst();
+			Remove(temp)
+			return 
 		}
 	
 	
